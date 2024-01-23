@@ -40,15 +40,13 @@ jobs:
 
     - name: Fix firewall rules
       run: |
-        echo "iptables -S | grep FORWARD"
-        sudo iptables -S | grep FORWARD
-        echo "iptables -S | grep docker"
-        sudo iptables -S | grep docker
+        echo "iptables -S"
+        sudo iptables -S
         
-        sudo iptables -A INPUT -i docker0 -j ACCEPT
+        #sudo iptables -A INPUT -i docker0 -j ACCEPT
 
-        echo "iptables -S | grep docker"
-        sudo iptables -S | grep docker
+        #echo "iptables -S"
+        #sudo iptables -S
 
     - name: mvn test (amd64@container)
       run: |
