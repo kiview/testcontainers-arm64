@@ -1,11 +1,13 @@
 = Test Java Application on Arm64 inside an Amd64 node on Github Actions
 
 This is a simple Quarkus Application containing a REST client that communicates with a remote Hello service.
+
 During integration tests, the Hello service is served by a container (`https://hub.docker.com/r/thomaspoignant/hello-world-rest-json[thomaspoignant/hello-world-rest-json]`) started via Testcontainers.
+
 To test the whole, the following need to get done:
 
 * Install QEMU static binaries using `setup-qemu-action`
 * Start Maven build inside an Arm64 Container
 * Configure the above container to be able to communicate with the Docker Daemon to
-  * Spawn new containers
-  * Access the containers via TCP
+  * Spawn new containers (a.k.a. https://java.testcontainers.org/supported_docker_environment/continuous_integration/dind_patterns[Docker wormhole pattern])
+  * Access the containers via TCP (by adding an extra Firewall rule)

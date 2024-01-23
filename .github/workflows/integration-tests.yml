@@ -45,7 +45,10 @@ jobs:
         echo "iptables -S | grep docker"
         sudo iptables -S | grep docker
         
-        sudo iptables -t filter -I INPUT 1 -s 172.17.0.0/24 -j ACCEPT
+        sudo iptables -A INPUT -i docker0 -j ACCEPT
+
+        echo "iptables -S | grep docker"
+        sudo iptables -S | grep docker
 
         docker run --rm \
           -v ~/.m2/repository:/root/.m2/repository \
