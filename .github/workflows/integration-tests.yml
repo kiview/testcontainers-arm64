@@ -48,6 +48,10 @@ jobs:
         #echo "iptables -S"
         #sudo iptables -S
 
+    - name: docker version
+      run: |
+        docker version
+
     - name: mvn test (amd64@container)
       run: |
         docker run --rm \
