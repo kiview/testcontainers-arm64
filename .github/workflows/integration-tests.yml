@@ -40,12 +40,14 @@ jobs:
 
     - name: mvn test (arm64)
       run: |
+        sudo iptables -P FORWARD ACCEPT
+        sudo iptables-legacy -P FORWARD ACCEPT
+        sudo iptables -S | grep FORWARD
+
         docker run --rm \
           -v ~/.m2/repository:/root/.m2/repository \
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v $PWD:$PWD \
           -w $PWD \
-          --network="host" \
-          -e TESTCONTAINERS_HOST_OVERRIDE=localhost \
           arm64v8/amazoncorretto:17-al2023 \
           ./mvnw clean test -ntp
