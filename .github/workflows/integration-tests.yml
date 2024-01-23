@@ -38,7 +38,7 @@ jobs:
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
 
-    - name: mvn test (arm64)
+    - name: Fix firewall rules
       run: |
         echo "iptables -S | grep FORWARD"
         sudo iptables -S | grep FORWARD
@@ -50,6 +50,18 @@ jobs:
         echo "iptables -S | grep docker"
         sudo iptables -S | grep docker
 
+    - name: mvn test (amd64@container)
+      run: |
+        docker run --rm \
+          -v ~/.m2/repository:/root/.m2/repository \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          -v $PWD:$PWD \
+          -w $PWD \
+          amazoncorretto:17-al2023 \
+          ./mvnw clean test -ntp
+
+    - name: mvn test (arm64@container)
+      run: |
         docker run --rm \
           -v ~/.m2/repository:/root/.m2/repository \
           -v /var/run/docker.sock:/var/run/docker.sock \
