@@ -10,4 +10,4 @@ To test the whole, the following need to get done:
 * Start Maven build inside an Arm64 Container
 * Configure the above container to be able to communicate with the Docker Daemon to
   * Spawn new containers (a.k.a. https://java.testcontainers.org/supported_docker_environment/continuous_integration/dind_patterns[Docker wormhole pattern])
-  * Access the containers via TCP (by adding an extra Firewall rule)
+  * Disable Ryuk due to https://github.com/testcontainers/testcontainers-java/issues/8138[testcontainers#8138]
