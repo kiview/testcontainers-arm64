@@ -14,6 +14,7 @@ public class HelloTestResource implements QuarkusTestResourceLifecycleManager {
 
     @Override
     public Map<String, String> start() {
+        System.out.println("TESTCONTAINERS_RYUK_DISABLED = " + System.getenv("TESTCONTAINERS_RYUK_DISABLED"));
         helloContainer = new GenericContainer<>("thomaspoignant/hello-world-rest-json")
                 .withExposedPorts(8080)
                 .waitingFor(Wait.forHttp("/"));

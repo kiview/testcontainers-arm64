@@ -69,5 +69,6 @@ jobs:
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v $PWD:$PWD \
           -w $PWD \
+          -e TESTCONTAINERS_RYUK_DISABLED=true \
           arm64v8/amazoncorretto:17-al2023 \
           ./mvnw clean test -ntp
