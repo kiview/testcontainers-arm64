@@ -70,5 +70,6 @@ jobs:
           -v $PWD:$PWD \
           -w $PWD \
           -e TESTCONTAINERS_RYUK_DISABLED=true \
-          arm64v8/amazoncorretto:17-al2023 \
+          --platform linux/arm64/v8 \
+          eclipse-temurin:17-jdk \
           ./mvnw clean test -ntp
