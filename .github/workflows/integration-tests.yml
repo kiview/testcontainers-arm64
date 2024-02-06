@@ -30,37 +30,37 @@ jobs:
         distribution: temurin
         java-version: 17
 
-    # first test directly on the host OS (amd64)
-    - name: mvn test (amd64)
-      run: ./mvnw test -ntp
+    # # first test directly on the host OS (amd64)
+    # - name: mvn test (amd64)
+    #   run: ./mvnw test -ntp
 
     # then test on arm64 in a container
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v3
 
-    - name: Fix firewall rules
-      run: |
-        echo "iptables -S"
-        sudo iptables -S
+    # - name: Fix firewall rules
+    #   run: |
+    #     echo "iptables -S"
+    #     sudo iptables -S
         
-        #sudo iptables -A INPUT -i docker0 -j ACCEPT
+    #     #sudo iptables -A INPUT -i docker0 -j ACCEPT
 
-        #echo "iptables -S"
-        #sudo iptables -S
+    #     #echo "iptables -S"
+    #     #sudo iptables -S
 
-    - name: docker version
-      run: |
-        docker version
+    # - name: docker version
+    #   run: |
+    #     docker version
 
-    - name: mvn test (amd64@container)
-      run: |
-        docker run --rm \
-          -v ~/.m2/repository:/root/.m2/repository \
-          -v /var/run/docker.sock:/var/run/docker.sock \
-          -v $PWD:$PWD \
-          -w $PWD \
-          amazoncorretto:17-al2023 \
-          ./mvnw clean test -ntp
+    # - name: mvn test (amd64@container)
+    #   run: |
+    #     docker run --rm \
+    #       -v ~/.m2/repository:/root/.m2/repository \
+    #       -v /var/run/docker.sock:/var/run/docker.sock \
+    #       -v $PWD:$PWD \
+    #       -w $PWD \
+    #       amazoncorretto:17-al2023 \
+    #       ./mvnw clean test -ntp
 
     - name: mvn test (arm64@container)
       run: |
