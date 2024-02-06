@@ -70,7 +70,6 @@ jobs:
           -v /var/run/docker.sock:/var/run/docker.sock \
           -v $PWD:$PWD \
           -w $PWD \
-          -e TESTCONTAINERS_RYUK_DISABLED=true \
           --platform linux/arm64/v8 \
           eclipse-temurin:17-jdk \
           ./mvnw clean test -ntp
